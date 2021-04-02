@@ -11,8 +11,14 @@ public class Lab11_03 extends JFrame implements ActionListener {
 
     public Lab11_03() {
         super("Program Using Timer");
+        Container c = getContentPane();
         swTimer = new Timer(1000, this);
         swTimer.start();
+        c.setLayout(new FlowLayout());
+        c.add(new JLabel("Enter amount : "));
+        n1 = new JTextField(10);
+        n1.addActionListener(this);
+        c.add(n1);
     }
 
     public void paint(Graphics g) {
@@ -25,19 +31,19 @@ public class Lab11_03 extends JFrame implements ActionListener {
         int Blue = (int) (Math.random() * 256);
         g.setColor(new Color(Red, Green, Blue));
 
-        // g.drawOval(x, y, 50, 50);
-        // g.fillRect(x, y, 50, 50);
-        // g.drawRect(x, y, 50, 50);
-
-        Container c = getContentPane();
-        c.setLayout(new FlowLayout());
-        c.add(new JLabel("Enter amount : "));
-        n1 = new JTextField(10);
-        n1.addActionListener(this);
-        c.add(n1);
-        if (n1.equals("fillOval")) {
+        String O = n1.getText();
+        if (O.equals("fillOval")) {
             g.fillOval(x, y, (int) (Math.random() * 256), (int) (Math.random() * 256));
+        } else if (O.equals("drawOval")) {
+            g.fillRect(x, y, (int) (Math.random() * 256), (int) (Math.random() * 256));
+        } else if (O.equals("fillRect")) {
+            g.fillRect(x, y, (int) (Math.random() * 256), (int) (Math.random() * 256));
+        } else if (O.equals("drawRect")) {
+            g.drawRect(x, y, (int) (Math.random() * 256), (int) (Math.random() * 256));
+        } else {
+            g.drawString(O, x, y);
         }
+
     }
 
     public void actionPerformed(ActionEvent event) {
